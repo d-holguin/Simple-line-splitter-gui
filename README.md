@@ -14,7 +14,7 @@ Feel free to inform me it works on your OS via issues or with any quesitons you 
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/benchMarkPhoto.PNG)
 
-### Confirmation dialog to confirm fine to read and output paths are correct. Also formats the amount of lines to be more readable.
+### Confirmation dialog to confirm file to read and output paths are correct. Also formats the amount of lines to be more readable.
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/meguminDialog.PNG)
 
