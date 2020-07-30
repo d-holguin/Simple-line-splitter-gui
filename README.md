@@ -6,7 +6,8 @@ Easy to use cross platform gui. Just make sure the devices have Java11 or higher
 
 Flat light look and feel theme of the gui was used from https://github.com/JFormDesigner/FlatLaf by DevCharly
 
-### Works on windows with (jdk 11), havn't confirmed with other platfroms. Feel free to inform me it works on your OS via issues or with any quesitons you might have.
+### Works on windows with (jdk 11), should work on other Platform as long as you install the JRE which can be found here https://adoptopenjdk.net/ 
+Feel free to inform me it works on your OS via issues or with any quesitons you might have.
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/Capture.PNG)
 
 ### Benchedmarked with 1.5mil line csv file completed processing them by 10,000 lines into 150 files. Took about a second.
