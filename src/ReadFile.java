@@ -17,6 +17,7 @@
  *
  */
 
+import javax.swing.*;
 import java.io.*;
 import java.util.Arrays;
 
@@ -38,6 +39,7 @@ class ReadFile {
             br = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error reading file " );
         }
     }
 
@@ -84,9 +86,9 @@ class ReadFile {
                 }
                 br.close();
             } else {
-                System.err.println("Error: Incompatible File");
+                JOptionPane.showMessageDialog(null, "Error, Incompatible file " );
             }
-        } catch (IOException ex) { //asdfasdasdasdasdadasd
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }

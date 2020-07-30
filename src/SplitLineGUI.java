@@ -42,8 +42,6 @@ public class SplitLineGUI extends JFrame {
     private JTextArea infoTextArea;
 
 
-
-
     /**
      * adds the nested layout panel which contains all the panels to the
      * calculator frame making the gui calculator.
@@ -92,9 +90,7 @@ public class SplitLineGUI extends JFrame {
                 fileName = "\\" + st.nextToken();
 
 
-
-
-               // f.getName().substring(0, indexOf("."));
+                // f.getName().substring(0, indexOf("."));
 
                 // read  and/or display the file somehow. ....
 
@@ -147,22 +143,29 @@ public class SplitLineGUI extends JFrame {
         outBtn.addActionListener(e -> {
 
             JFileChooser chooser = new JFileChooser();
+
             // optionally set chooser options ...
             //chooser.setCurrentDirectory(new java.io.File("."));
             chooser.setDialogTitle("Choose A Directory/Folder To Output Files To.");
             chooser.setPreferredSize(new Dimension(650, 400));
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            chooser.setAcceptAllFileFilterUsed(false);
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            chooser.setApproveButtonText("Choose directory");
+            // chooser.setAcceptAllFileFilterUsed(false);
+            int option = chooser.showDialog(null,
+                    "Select Directory");
 
-            if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                File f = chooser.getCurrentDirectory();
+            if (option == JFileChooser.APPROVE_OPTION) {
+                File f = chooser.getSelectedFile();
 
-                // read  and/or display the file somehow. ....
+                if (!f.isDirectory()) {
+                    f = f.getParentFile();
+                }
 
-                outFileTField.setText(chooser.getSelectedFile().getAbsolutePath());
 
-                fileDirectoryName = chooser.getSelectedFile().getAbsolutePath();
+                // displays file path in uneditable tfield and gets the dir path to output files to
+                outFileTField.setText(f.getAbsolutePath());
 
+                fileDirectoryName = f.getAbsolutePath();
 
             }
 
@@ -197,13 +200,25 @@ public class SplitLineGUI extends JFrame {
 
         outInfoPanel.add(runButton);
         outInfoPanel.add(infoTAScroll);
-        class ProcessTheFile implements ActionListener {
+        class ProcessTheFile extends Component implements ActionListener {
             public void actionPerformed(ActionEvent event) {
                 try {
                     linesToSplit = Integer.parseInt(rowAmountTField.getText().trim());
 
 
-                    selectFile();
+                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                    int dialogResult = JOptionPane.showConfirmDialog(this,
+                            "Are you sure you want to split "
+                            + fileName +" every" + linesToSplit +" times to" + fileDirectoryName, "Process File Confirmation", dialogButton);
+                    if(dialogResult == 0) {
+                        System.out.println("Yes option");
+                        selectFile();
+                    } else {
+                        System.out.println("No Option");
+                    }
+
+
+
 
 
                 } catch (NumberFormatException error) {
