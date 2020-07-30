@@ -35,7 +35,7 @@ public class MainViewer {
 
 
         FlatLightLaf.install();
-        //JFrame.setDefaultLookAndFeelDecorated(true); //sets the window decoration
+        JFrame.setDefaultLookAndFeelDecorated(true); //sets the window decoration
 
         JFrame frame = new SplitLineGUI();
        ImageIcon img = new ImageIcon("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\fileIconTopLeftDecoration.png");
@@ -54,40 +54,7 @@ public class MainViewer {
 }
 
 
-//
-//
-//
-//        Scanner scanner = new Scanner(System.in);
-//
-//        try {
-//
-//            while (true) {
-//                System.out.print("Enter a file name to process and split lines(press 0 to quit) ");
-//
-//                String fileName = scanner.nextLine();
-//
-//                System.out.print("Enter how many lines/rows to split the file into ");
-//
-//                int lineAmount = Integer.parseInt(scanner.nextLine());
-//
-//                if (fileName.equals("0")) {
-//                    break;
-//                }
-//
-//
-//                ReadFile readFile = new ReadFile(fileName);
-//                readFile.splitFile(fileName, lineAmount);
-//            }
-//
-//
-//        } catch (NumberFormatException error) {
-//            System.out.println("There was an error reading the file you typed or the ");
-//
-//        }
-//
-//
-//    }
-//
+
 
 
 

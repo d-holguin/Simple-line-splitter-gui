@@ -22,6 +22,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.StringTokenizer;
 
 /**
@@ -47,7 +48,7 @@ public class SplitLineGUI extends JFrame {
      * calculator frame making the gui calculator.
      */
     public SplitLineGUI() {
-        // fileChoosePanel();
+
         createAllPanels();
 
 
@@ -63,7 +64,6 @@ public class SplitLineGUI extends JFrame {
         mainPanelLayout.add(outFileChooser());
         mainPanelLayout.add(outPutInfo());
 
-
         add(mainPanelLayout);
 
     }
@@ -74,14 +74,13 @@ public class SplitLineGUI extends JFrame {
 
         JPanel mainPanel = new JPanel();
         JButton btn = new JButton("Choose A File To Process");
-        //btn.setBackground(Color.BLACK);
 
         JTextField fileTField = new JTextField(FIELD_WIDTH);
         fileTField.setEditable(false);
         btn.addActionListener(e -> {
 
             JFileChooser chooser = new JFileChooser();
-            // set chooser options ...
+            // set chooser options
             chooser.setDialogTitle("Choose A File To Process.");
             chooser.setPreferredSize(new Dimension(600, 400));
             if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -89,40 +88,23 @@ public class SplitLineGUI extends JFrame {
                 StringTokenizer st = new StringTokenizer(f.getName(), ".");
                 fileName = "\\" + st.nextToken();
 
-
-                // f.getName().substring(0, indexOf("."));
-
                 // read  and/or display the file somehow. ....
 
                 fileTField.setText(chooser.getSelectedFile().getAbsolutePath());
                 fileToProcess = chooser.getSelectedFile().getAbsolutePath().trim();
             }
 
-
         });
-        //pack();
+
         setVisible(true);
-
-
-        //fileTField.setEditable(false);
+        setVisible(true);
 
 
         //=============================================================================================================
 
-
-        //pack();
-        setVisible(true);
-
-
         mainPanel.add(btn);
-
         mainPanel.add(fileTField);
-
-
-        //fileTField.setEditable(false);
-
         mainPanel.add(fileTField);
-
 
         return mainPanel;
     }
@@ -179,13 +161,11 @@ public class SplitLineGUI extends JFrame {
         return panel2;
     }
 
-
     public JPanel outPutInfo() {
 
         JPanel outInfoPanel = new JPanel();
 
         JButton runButton = new JButton("RUN");
-
 
         JTextArea infoTextArea = new JTextArea(4, 25);
         JScrollPane infoTAScroll = new JScrollPane(infoTextArea);
@@ -194,9 +174,7 @@ public class SplitLineGUI extends JFrame {
 
         infoTAScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-
         infoTextArea.setEditable(false);
-
 
         outInfoPanel.add(runButton);
         outInfoPanel.add(infoTAScroll);
@@ -204,31 +182,39 @@ public class SplitLineGUI extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 try {
                     linesToSplit = Integer.parseInt(rowAmountTField.getText().trim());
-
-
+                    ImageIcon icon = new ImageIcon("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\Megumin.jpg");
                     int dialogButton = JOptionPane.YES_NO_OPTION;
-                    int dialogResult = JOptionPane.showConfirmDialog(this,
-                            "Are you sure you want to split "
-                            + fileName +" every" + linesToSplit +" times to" + fileDirectoryName, "Process File Confirmation", dialogButton);
-                    if(dialogResult == 0) {
-                        System.out.println("Yes option");
+                    String formatedFileName = fileName.substring(1, fileName.length() - 1);
+
+
+
+
+                    int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to split (" + formatedFileName + ") \nevery "
+                                    + NumberFormat.getInstance().format(linesToSplit) + "  lines to\n " + fileDirectoryName,
+
+                            "Process File Confirmation", dialogButton, JOptionPane.INFORMATION_MESSAGE, icon);
+                                    //formats the lines to split to a more readable format
+
+
+
+                    if (dialogResult == 0) {
+
+
                         selectFile();
+                        System.out.println("Yes option");
+
                     } else {
                         System.out.println("No Option");
+                        return;
+
                     }
-
-
-
-
 
                 } catch (NumberFormatException error) {
                     JOptionPane.showMessageDialog(null, "Enter only whole positive numbers in the text Field. You Entered " + error.getMessage());
                     rowAmountTField.setText("");
                 }
 
-
             }
-
 
         }
 
@@ -242,23 +228,16 @@ public class SplitLineGUI extends JFrame {
 
     public JPanel rowToSplitInfo() {
 
-
         JPanel rowInfoPanel = new JPanel();
-
 
         rowAmountTField = new JTextField("", 10);
 
-
         JLabel rowAmountLabel = new JLabel("Enter The Amount Of Lines To Split, Numbers Only.");
-
 
         rowInfoPanel.add(rowAmountLabel);
         rowInfoPanel.add(rowAmountTField);
         return rowInfoPanel;
-
-
     }
-
 
     public void selectFile() {
         long startTime = System.currentTimeMillis();
