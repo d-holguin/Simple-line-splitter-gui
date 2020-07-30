@@ -13,4 +13,9 @@ Flat light look and feel theme of the gui was used from https://github.com/JForm
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/benchMarkPhoto.PNG)
 
+### Confirmation dialog to confirm fine to read and output paths are correct. Also formats the amount of lines to be more readable.
+
+![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/meguminDialog.PNG)
+
+
 
