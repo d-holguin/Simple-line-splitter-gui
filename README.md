@@ -9,4 +9,4 @@ Flat light look and feel theme of the gui was used from https://github.com/JForm
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/Capture.PNG)
 
-### Works on windows with jdk 11, havn't confirmed with other platfroms.
+### Works on windows with (jdk 11), havn't confirmed with other platfroms. Feel free to inform me it works on your OS via issues or any quesitons you might have.
