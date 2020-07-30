@@ -17,6 +17,7 @@
  *
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,6 @@ public class SplitLineGUI extends JFrame {
     private String fileToProcess;
     private String fileDirectoryName;
     private String fileName;
-    private JTextArea infoTextArea;
 
 
     /**
@@ -182,19 +182,22 @@ public class SplitLineGUI extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 try {
                     linesToSplit = Integer.parseInt(rowAmountTField.getText().trim());
-                    ImageIcon icon = new ImageIcon("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\Megumin.jpg");
+
+
+
+                    ImageIcon icon = new ImageIcon(getClass().getResource("meguminSmug2updated.png"));
+
+
+
                     int dialogButton = JOptionPane.YES_NO_OPTION;
                     String formatedFileName = fileName.substring(1, fileName.length() - 1);
-
-
 
 
                     int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to split (" + formatedFileName + ") \nevery "
                                     + NumberFormat.getInstance().format(linesToSplit) + "  lines to\n " + fileDirectoryName,
 
                             "Process File Confirmation", dialogButton, JOptionPane.INFORMATION_MESSAGE, icon);
-                                    //formats the lines to split to a more readable format
-
+                    //formats the lines to split to a more readable format
 
 
                     if (dialogResult == 0) {

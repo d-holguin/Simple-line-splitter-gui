@@ -38,7 +38,8 @@ public class MainViewer {
         JFrame.setDefaultLookAndFeelDecorated(true); //sets the window decoration
 
         JFrame frame = new SplitLineGUI();
-       ImageIcon img = new ImageIcon("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\fileIconTopLeftDecoration.png");
+        ImageIcon img = new ImageIcon(MainViewer.class.getResource("fileIconTopLeftDecoration.png"));
+
       //ImageIcon image = new ImageIcon(this.getClass().getResource("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\Megumin.jpg"));
 //
        frame.setIconImage(img.getImage());
