@@ -9,7 +9,7 @@ Flat light look and feel theme of the gui was used from https://github.com/JForm
 ### Works on windows with (jdk 11), havn't confirmed with other platfroms. Feel free to inform me it works on your OS via issues or any quesitons you might have.
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/Capture.PNG)
 
-### Benchedmarked with 15mil line csv file completed processing them by 10,000 lines into 150 files. Took less then a second.
+### Benchedmarked with 1.5mil line csv file completed processing them by 10,000 lines into 150 files. Took about a second.
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/benchMarkPhoto.PNG)
 
