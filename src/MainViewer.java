@@ -17,9 +17,7 @@
  *
  */
 
-
-import com.formdev.flatlaf.FlatLightLaf;
-
+import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import javax.swing.*;
 
@@ -34,17 +32,12 @@ public class MainViewer {
     public static void main(String[] args) {
 
 
-        FlatLightLaf.install();
+        FlatIntelliJLaf.install();
         JFrame.setDefaultLookAndFeelDecorated(true); //sets the window decoration
 
         JFrame frame = new SplitLineGUI();
         ImageIcon img = new ImageIcon(MainViewer.class.getResource("fileIconTopLeftDecoration.png"));
-
-      //ImageIcon image = new ImageIcon(this.getClass().getResource("D:\\AllProjects\\JavaCleanProjects\\FilerReaderSplitLines\\Simple-line-splitter\\resources\\Megumin.jpg"));
-//
-       frame.setIconImage(img.getImage());
-
-
+        frame.setIconImage(img.getImage());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Split line GUI");

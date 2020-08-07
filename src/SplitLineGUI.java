@@ -17,8 +17,8 @@
  *
  */
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,20 +33,19 @@ import java.util.StringTokenizer;
 public class SplitLineGUI extends JFrame {
 
 
-    private static final int FRAME_WIDTH = 500;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 500;
+    //list to update jlist component
+    private static DefaultComboBoxModel<String> listModel;
+
 
     private int linesToSplit;
-    private JTextField rowAmountTField;
     private String fileToProcess;
     private String fileDirectoryName;
     private String fileName;
+    //swing utils
+    private JTextField rowAmountTField;
 
-
-    /**
-     * adds the nested layout panel which contains all the panels to the
-     * calculator frame making the gui calculator.
-     */
     public SplitLineGUI() {
 
         createAllPanels();
@@ -58,12 +57,13 @@ public class SplitLineGUI extends JFrame {
     public void createAllPanels() {
 
         JPanel mainPanelLayout = new JPanel();
-        mainPanelLayout.setLayout(new GridLayout(4, 1));
+        //
+        mainPanelLayout.setLayout(new GridLayout(5,1));
         mainPanelLayout.add(fileChoosePanel());
         mainPanelLayout.add(rowToSplitInfo());
-        mainPanelLayout.add(outFileChooser());
-        mainPanelLayout.add(outPutInfo());
-
+        mainPanelLayout.add(createOutFileChooserPanel());
+        mainPanelLayout.add(buttonPanel());
+        mainPanelLayout.add(listOutput());
         add(mainPanelLayout);
 
     }
@@ -82,6 +82,7 @@ public class SplitLineGUI extends JFrame {
             JFileChooser chooser = new JFileChooser();
             // set chooser options
             chooser.setDialogTitle("Choose A File To Process.");
+            chooser.setApproveButtonText("Select A File To Process");
             chooser.setPreferredSize(new Dimension(600, 400));
             if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File f = chooser.getSelectedFile();
@@ -109,11 +110,11 @@ public class SplitLineGUI extends JFrame {
         return mainPanel;
     }
 
-    public JPanel outFileChooser() {
+    public JPanel createOutFileChooserPanel() {
 
         final int FIELD_WIDTH = 30;
 
-        JPanel panel2 = new JPanel();
+        JPanel fileOutChooserPanel = new JPanel();
 
 
         JButton outBtn = new JButton("Choose An Output Directory");
@@ -131,7 +132,7 @@ public class SplitLineGUI extends JFrame {
             chooser.setDialogTitle("Choose A Directory/Folder To Output Files To.");
             chooser.setPreferredSize(new Dimension(650, 400));
             chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            chooser.setApproveButtonText("Choose directory");
+            chooser.setApproveButtonText("Choose Directory");
             // chooser.setAcceptAllFileFilterUsed(false);
             int option = chooser.showDialog(null,
                     "Select Directory");
@@ -142,8 +143,6 @@ public class SplitLineGUI extends JFrame {
                 if (!f.isDirectory()) {
                     f = f.getParentFile();
                 }
-
-
                 // displays file path in uneditable tfield and gets the dir path to output files to
                 outFileTField.setText(f.getAbsolutePath());
 
@@ -154,40 +153,37 @@ public class SplitLineGUI extends JFrame {
 
         });
 
-        panel2.add(outBtn);
-        panel2.add(outFileTField);
+        fileOutChooserPanel.add(outBtn);
+        fileOutChooserPanel.add(outFileTField);
 
 
-        return panel2;
+        return fileOutChooserPanel;
     }
 
-    public JPanel outPutInfo() {
+    public JPanel buttonPanel() {
 
-        JPanel outInfoPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
 
-        JButton runButton = new JButton("RUN");
 
-        JTextArea infoTextArea = new JTextArea(4, 25);
-        JScrollPane infoTAScroll = new JScrollPane(infoTextArea);
 
-        infoTAScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        infoTAScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JButton runButton = new JButton("Click to Run");
 
-        infoTextArea.setEditable(false);
 
-        outInfoPanel.add(runButton);
-        outInfoPanel.add(infoTAScroll);
+
+
+        //add list item here
+        buttonPanel.add(runButton, BorderLayout.SOUTH);
+
+
+
         class ProcessTheFile extends Component implements ActionListener {
             public void actionPerformed(ActionEvent event) {
                 try {
                     linesToSplit = Integer.parseInt(rowAmountTField.getText().trim());
 
 
-
                     ImageIcon icon = new ImageIcon(getClass().getResource("meguminSmug2updated.png"));
-
-
 
                     int dialogButton = JOptionPane.YES_NO_OPTION;
                     String formatedFileName = fileName.substring(1, fileName.length() - 1);
@@ -199,44 +195,63 @@ public class SplitLineGUI extends JFrame {
                             "Process File Confirmation", dialogButton, JOptionPane.INFORMATION_MESSAGE, icon);
                     //formats the lines to split to a more readable format
 
-
                     if (dialogResult == 0) {
-
-
                         selectFile();
                         System.out.println("Yes option");
-
                     } else {
                         System.out.println("No Option");
                         return;
-
                     }
 
                 } catch (NumberFormatException error) {
                     JOptionPane.showMessageDialog(null, "Enter only whole positive numbers in the text Field. You Entered " + error.getMessage());
                     rowAmountTField.setText("");
                 }
-
             }
-
         }
-
-
         ActionListener processFileListener = new ProcessTheFile();
         runButton.addActionListener(processFileListener);
 
+        return buttonPanel;
+    }
 
-        return outInfoPanel;
+    public JPanel listOutput(){
+
+        JPanel outInfo = new JPanel(new GridLayout(1,1,15,15));
+        listModel = new DefaultComboBoxModel<String>();
+
+
+
+
+        JList list = new JList(listModel);
+        JScrollPane listScrollPane = new JScrollPane(list);
+        list.getPreferredSize();
+
+        list.setBorder(new EmptyBorder(10,10, 50, 10));
+        list.setFixedCellHeight(25);
+        list.setFixedCellWidth(450);
+
+        list.setFont(new Font("Arial",Font.LAYOUT_LEFT_TO_RIGHT,10));
+
+
+        listScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        listScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+
+
+        updateList("Updated info with display here...");
+
+        outInfo.add(listScrollPane);
+
+    return outInfo;
     }
 
     public JPanel rowToSplitInfo() {
 
         JPanel rowInfoPanel = new JPanel();
-
         rowAmountTField = new JTextField("", 10);
-
         JLabel rowAmountLabel = new JLabel("Enter The Amount Of Lines To Split, Numbers Only.");
-
         rowInfoPanel.add(rowAmountLabel);
         rowInfoPanel.add(rowAmountTField);
         return rowInfoPanel;
@@ -244,13 +259,19 @@ public class SplitLineGUI extends JFrame {
 
     public void selectFile() {
         long startTime = System.currentTimeMillis();
-
         ReadFile readFile = new ReadFile(fileToProcess);
         readFile.splitFile(fileToProcess, linesToSplit, fileDirectoryName, fileName);
-
         long endTime = System.currentTimeMillis();
-        System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
+
+        //infoTextArea.append("That took " + (endTime - startTime) + " milliseconds");
+        updateList("That took " + (endTime - startTime) + " milliseconds");
+
+    }
+
+    public static void updateList(String item) {
+
+        listModel.insertElementAt(item,0);
 
     }
 

@@ -30,7 +30,7 @@ import java.util.List;
 class ReadFile {
 
     private BufferedReader br;
-    private List<String> allowedExtensions = Arrays.asList(".txt", ".csv", ".java", ".sql" , "rtf");
+    private List<String> allowedExtensions = Arrays.asList(".txt", ".csv", ".java", ".sql" , "rtf", "doc");
 
     ReadFile(String fileName) {
         File file = new File(fileName);
@@ -66,7 +66,7 @@ class ReadFile {
         int numFiles = 0;
 
 
-        System.out.println(fileName);
+       //System.out.println(fileName);  //-------------------============
 
         try {
             String extensionFile = obtainExtension(fileName);
@@ -75,12 +75,13 @@ class ReadFile {
                 st = br.readLine();
                 while (st != null) {
 
-                    String newName = fileDir  + theFile + "-v" + numFiles + extensionFile;
+                    String newName = fileDir  + theFile + "-z" + numFiles + extensionFile;
 
                     st = writeSplitFile(newName, numRows, st);
 
                     numFiles++;
 
+                    SplitLineGUI.updateList(newName);
                     System.out.println(newName);
                 }
                 br.close();
