@@ -8,7 +8,7 @@ Easy to use cross platform gui. Just make sure the devices have Java11 or higher
 Flat light look and feel theme of the gui was used from https://github.com/JFormDesigner/FlatLaf by DevCharly
 
 
-Download a ready to use .jar here https://github.com/KiwiCode-s/Simple-line-splitter-gui/releases/tag/v0.2-alpha
+Download a ready to use .jar here https://github.com/KiwiCode-s/Simple-line-splitter-gui/releases/tag/1.0
 
 ![alt tag](https://github.com/KiwiCode-s/Simple-line-splitter-gui/blob/master/UsagePhotos/Addedoutputwindow.PNG)
 
