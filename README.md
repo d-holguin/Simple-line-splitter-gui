@@ -15,8 +15,4 @@ Download a ready to use .jar here https://github.com/d-holguin/Simple-line-split
 
 ### Confirmation dialog to confirm file to read and output paths are correct. Also formats the amount of lines to be more readable.
 
-![alt tag](https://github.com/d-holguin/Simple-line-splitter-gui/blob/master/UsagePhotos/meguminDialog.PNG)
-
-Feel free to inform me if it works on your OS via issues or with any quesitons you might have.
-
 
