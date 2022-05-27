@@ -113,20 +113,12 @@ public class SplitLineGUI extends JFrame {
     public JPanel createOutFileChooserPanel() {
 
         final int FIELD_WIDTH = 30;
-
         JPanel fileOutChooserPanel = new JPanel();
-
-
         JButton outBtn = new JButton("Choose An Output Directory");
-
         JTextField outFileTField = new JTextField(FIELD_WIDTH);
-
-
         outFileTField.setEditable(false);
         outBtn.addActionListener(e -> {
-
             JFileChooser chooser = new JFileChooser();
-
             // optionally set chooser options ...
             //chooser.setCurrentDirectory(new java.io.File("."));
             chooser.setDialogTitle("Choose A Directory/Folder To Output Files To.");
@@ -136,54 +128,31 @@ public class SplitLineGUI extends JFrame {
             // chooser.setAcceptAllFileFilterUsed(false);
             int option = chooser.showDialog(null,
                     "Select Directory");
-
             if (option == JFileChooser.APPROVE_OPTION) {
                 File f = chooser.getSelectedFile();
-
                 if (!f.isDirectory()) {
                     f = f.getParentFile();
                 }
                 // displays file path in uneditable tfield and gets the dir path to output files to
                 outFileTField.setText(f.getAbsolutePath());
-
                 fileDirectoryName = f.getAbsolutePath();
-
             }
-
-
         });
-
         fileOutChooserPanel.add(outBtn);
         fileOutChooserPanel.add(outFileTField);
-
-
         return fileOutChooserPanel;
     }
 
     public JPanel buttonPanel() {
 
         JPanel buttonPanel = new JPanel();
-
-
-
-
         JButton runButton = new JButton("Click to Run");
-
-
-
-
         //add list item here
         buttonPanel.add(runButton, BorderLayout.SOUTH);
-
-
-
         class ProcessTheFile extends Component implements ActionListener {
             public void actionPerformed(ActionEvent event) {
                 try {
                     linesToSplit = Integer.parseInt(rowAmountTField.getText().trim());
-
-
-                    ImageIcon icon = new ImageIcon(getClass().getResource("meguminSmug2updated.png"));
 
                     int dialogButton = JOptionPane.YES_NO_OPTION;
                     String formatedFileName = fileName.substring(1, fileName.length() - 1);
@@ -192,7 +161,7 @@ public class SplitLineGUI extends JFrame {
                     int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to split (" + formatedFileName + ") \nevery "
                                     + NumberFormat.getInstance().format(linesToSplit) + "  lines to\n " + fileDirectoryName,
 
-                            "Process File Confirmation", dialogButton, JOptionPane.INFORMATION_MESSAGE, icon);
+                            "Process File Confirmation", dialogButton, JOptionPane.INFORMATION_MESSAGE);
                     //formats the lines to split to a more readable format
 
                     if (dialogResult == 0) {
